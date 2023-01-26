@@ -13,9 +13,6 @@
     "seed-db": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.[ts,tsx]": "next lint --fix"
-  },
   "dependencies": {
     "@next/font": "13.1.5",
     "@prisma/client": "^4.9.0",
@@ -63,7 +60,6 @@
     "eslint-plugin-unicorn": "^45.0.2",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
-    "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
     "prisma": "^4.9.0",
     "storybook-addon-next-router": "^4.0.2",
