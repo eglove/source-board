@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test-storybook": "test-storybook"
+    "test-storybook": "test-storybook",
+    "seed-db": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@next/font": "13.1.5",
+    "@prisma/client": "^4.9.0",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-navigation-menu": "^1.1.1",
     "next": "13.1.5",
@@ -56,7 +59,12 @@
     "eslint-plugin-storybook": "^0.6.10",
     "eslint-plugin-unicorn": "^45.0.2",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
+    "prisma": "^4.9.0",
+    "storybook-addon-next-router": "^4.0.2",
+    "ts-node": "^10.9.1",
     "typescript": "4.9.4"
   }
 }

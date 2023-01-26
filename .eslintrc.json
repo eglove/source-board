@@ -53,6 +53,7 @@
     "react/no-unknown-property": "warn",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": "error",
+    "unicorn/prefer-top-level-await": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",

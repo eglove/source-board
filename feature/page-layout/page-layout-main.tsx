@@ -1,7 +1,7 @@
 import Navigation from 'source/feature/navigation/navigation';
 
 type PageLayoutMainProperties = {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | String;
 };
 
 export function PageLayoutMain({
