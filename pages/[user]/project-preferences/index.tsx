@@ -5,7 +5,11 @@ import { prisma } from 'source/prisma/client';
 export default function ProjectPreferences({
   preferences,
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
-  return <PageLayoutMain>{JSON.stringify(preferences)}</PageLayoutMain>;
+  return (
+    <PageLayoutMain>
+      <>{JSON.stringify(preferences)} HelloHello</>
+    </PageLayoutMain>
+  );
 }
 
 export async function getServerSideProps(context: NextPageContext) {
