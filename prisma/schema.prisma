@@ -18,8 +18,8 @@ model User {
 }
 
 model ProjectPreference {
-  id     String @id @default(uuid())
-  userId String
+  id   String @id @default(uuid())
+  name String
 
   user User[]
 }
