@@ -7,16 +7,16 @@ const createJestConfig = nextJest({
 export default createJestConfig({
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['./feature/**', './pages/**'],
+  collectCoverageFrom: ['./feature/**'],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['json', 'text'],
   coverageThreshold: {
     global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50,
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70,
     },
   },
   testEnvironment: 'jest-environment-jsdom',
