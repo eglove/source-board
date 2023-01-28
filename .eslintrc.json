@@ -1,5 +1,10 @@
 {
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
   "extends": [
+    "plugin:jest/recommended",
     "next/core-web-vitals",
     "plugin:unicorn/recommended",
     "xo",
@@ -10,6 +15,7 @@
     "prettier"
   ],
   "plugins": [
+    "jest",
     "simple-import-sort",
     "unused-imports",
     "prettier"

@@ -3,7 +3,6 @@
     position: relative;
     display: flex;
     justify-content: center;
-    width: 100vw;
     z-index: 1;
 }
 
@@ -21,8 +20,6 @@
 .NavigationMenuLink {
     display: block;
     text-decoration: none;
-    font-size: 1rem;
-    line-height: 1;
     padding: 8px;
 }
 

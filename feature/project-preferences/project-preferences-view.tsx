@@ -1,21 +1,23 @@
 import * as Label from '@radix-ui/react-label';
-import { useRouter } from 'next/router';
+import { type TRPCClientErrorLike } from '@trpc/client';
 import ErrorLoading from 'source/feature/common/error-loading/error-loading';
-import { trpc } from 'source/feature/util/trpc';
+import styles from 'source/feature/project-preferences/project-preferences.module.css';
+import {
+  type ProjectPreferenceGetForUserReturn,
+  type projectPreferenceRouter,
+} from 'source/feature/server/routers/project-preference';
 
-import styles from './project-preferences.module.css';
+type ProjectPreferencesViewProperties = {
+  isLoading: boolean;
+  error?: TRPCClientErrorLike<typeof projectPreferenceRouter.getForUser> | null;
+  data?: ProjectPreferenceGetForUserReturn;
+};
 
-export default function ProjectPreferences(): JSX.Element {
-  const router = useRouter();
-  const { data, isLoading, error } = trpc.projectPreference.useQuery(
-    {
-      username: router.query.user as string,
-    },
-    {
-      enabled: typeof router.query.user === 'string',
-    },
-  );
-
+export default function ProjectPreferencesView({
+  data,
+  isLoading,
+  error,
+}: ProjectPreferencesViewProperties): JSX.Element {
   if (isLoading || error) {
     return (
       <ErrorLoading
@@ -29,7 +31,7 @@ export default function ProjectPreferences(): JSX.Element {
   return (
     <div className={styles.Container}>
       <h1>Project Preferences</h1>
-      <form>
+      <form aria-label="form">
         <input className={styles.Input} id="addPreference" type="text" />
         <Label.Root className={styles.LabelRoot} htmlFor="addPreference">
           <button className={styles.SubmitButton} type="submit">

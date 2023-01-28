@@ -4,8 +4,6 @@
 }
 
 .LabelRoot {
-    font-size: 16px;
-    font-weight: 500;
     line-height: 35px;
 }
 
@@ -17,8 +15,6 @@
     border-radius: 4px;
     padding: 0 10px;
     height: 35px;
-    font-size: 16px;
-    line-height: 1;
     box-shadow: 0 0 0 1px var(--blackA9);
 }
 
@@ -28,8 +24,7 @@
 
 .SubmitButton {
     background-color: var(--green5);
-    font-size: 16px;
     border-color: var(--green10);
-    padding: 8px;
+    padding: 4px;
     margin-left: 8px;
 }

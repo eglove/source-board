@@ -8,9 +8,9 @@ export function PageLayoutMain({
   children,
 }: PageLayoutMainProperties): JSX.Element {
   return (
-    <>
+    <main>
       <Navigation />
       {children}
-    </>
+    </main>
   );
 }
