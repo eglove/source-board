@@ -4,10 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
-import {
-  projectPreferenceGetForUserReturnSchema,
-  projectPreferenceRouter,
-} from 'source/feature/server/routers/project-preference';
+import { projectPreferenceGetForUserReturnSchema } from 'source/feature/server/routers/project-preference';
 import { expectNoA11yViolations, mockTrpcError } from 'source/tests/util';
 
 describe('ProjectPreferences', () => {
@@ -36,10 +33,7 @@ describe('ProjectPreferences', () => {
 
   it('should show the correct error message when there is an error', () => {
     const { getByText } = render(
-      <ProjectPreferencesView
-        error={mockTrpcError('Error!', projectPreferenceRouter.getForUser)}
-        isLoading={false}
-      />,
+      <ProjectPreferencesView error={mockTrpcError()} isLoading={false} />,
     );
 
     const element = getByText('Error! Failed to get preferences!');

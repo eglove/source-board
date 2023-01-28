@@ -1,38 +1,39 @@
-import { type QueryClient } from '@tanstack/query-core';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { render } from '@testing-library/react';
+import { generateMock } from '@anatine/zod-mock';
 import { type TRPCClientErrorLike } from '@trpc/client';
 import { type AnyProcedure, type AnyRouter } from '@trpc/server';
 import { axe } from 'jest-axe';
-import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
-import { type ReactElement } from 'react';
+import { z } from 'zod';
 
 export const mockTrpcError = (
-  value: unknown,
-  procedure: AnyRouter | AnyProcedure,
-) => {
-  return value as TRPCClientErrorLike<typeof procedure>;
+  customOptions?: Partial<TRPCClientErrorLike<AnyRouter | AnyProcedure>>,
+): TRPCClientErrorLike<AnyRouter | AnyProcedure> => {
+  const errorSchema = z.object({
+    message: z.string(),
+    data: z.object({
+      path: z.string(),
+      code: z.string(),
+      httpStatus: z.number(),
+      stack: z.string(),
+    }),
+    shape: z.object({
+      message: z.string(),
+      code: z.number(),
+      data: z.object({
+        path: z.string(),
+        code: z.string(),
+        httpStatus: z.number(),
+        stack: z.string(),
+      }),
+    }),
+  });
+
+  return {
+    ...generateMock(errorSchema),
+    ...customOptions,
+  };
 };
 
 export const expectNoA11yViolations = async (container: HTMLElement) => {
   const a11y = await axe(container);
   expect(a11y).toHaveNoViolations();
 };
-
-export function renderWithQueryClient(client: QueryClient, ui: ReactElement) {
-  const { rerender, ...result } = render(
-    <QueryClientProvider client={client}>{ui}</QueryClientProvider>,
-    {
-      wrapper: MemoryRouterProvider,
-    },
-  );
-
-  return {
-    ...result,
-    rerender(rerenderUi: ReactElement) {
-      rerender(
-        <QueryClientProvider client={client}>{rerenderUi}</QueryClientProvider>,
-      );
-    },
-  };
-}
