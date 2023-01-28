@@ -1,0 +1,7 @@
+.ErrorContainer {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    margin: auto;
+    color: var(--red10);
+}

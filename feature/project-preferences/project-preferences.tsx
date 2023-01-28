@@ -1,15 +1,31 @@
 import * as Label from '@radix-ui/react-label';
-import { type ProjectPreferencesData } from 'source/pages/[user]/project-preferences';
+import { useRouter } from 'next/router';
+import ErrorLoading from 'source/feature/common/error-loading/error-loading';
+import { trpc } from 'source/feature/util/trpc';
 
 import styles from './project-preferences.module.css';
 
-type ProjectPreferencesProperties = {
-  preferences: ProjectPreferencesData['preferences'];
-};
+export default function ProjectPreferences(): JSX.Element {
+  const router = useRouter();
+  const { data, isLoading, error } = trpc.projectPreference.useQuery(
+    {
+      username: router.query.user as string,
+    },
+    {
+      enabled: typeof router.query.user === 'string',
+    },
+  );
 
-export default function ProjectPreferences({
-  preferences,
-}: ProjectPreferencesProperties): JSX.Element {
+  if (isLoading || error) {
+    return (
+      <ErrorLoading
+        error={error}
+        errorMessage="Error! Failed to get preferences!"
+        isLoading={isLoading}
+      />
+    );
+  }
+
   return (
     <div className={styles.Container}>
       <h1>Project Preferences</h1>
@@ -23,7 +39,7 @@ export default function ProjectPreferences({
       </form>
       <br />
       <ul>
-        {preferences.map(preference => {
+        {data?.map(preference => {
           return <li key={preference.id}>{preference.name}</li>;
         })}
       </ul>
