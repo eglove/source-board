@@ -10,6 +10,8 @@ jobs:
         with:
           node-version: 18
       - uses: pnpm/action-setup@v2
+        with:
+          run_install: true
       - name: Run EsLint
         run: npm run lint
       - name: Run Tests
