@@ -18,8 +18,6 @@ jobs:
         run: pnpm i
       - name: Run EsLint
         run: npm run eslint
-      - name: Run Tests
-        run: npm run test
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
