@@ -1,13 +1,5 @@
 name: CI
-on:
-  push:
-    types: [ opened, synchronize, reopened ]
-    branches:
-      - develop
-  pull_request:
-    types: [ opened, synchronize, reopened ]
-    branches:
-      - develop
+on: [push]
 jobs:
   lintTest:
     name: Lint & Test
