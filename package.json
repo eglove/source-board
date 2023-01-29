@@ -6,6 +6,7 @@
     "node": ">=18",
     "pnpm": ">=7"
   },
+  "packageManager": "pnpm@7.26.2",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
