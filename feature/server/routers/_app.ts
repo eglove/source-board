@@ -1,4 +1,4 @@
-import { projectPreferenceRouter } from 'source/feature/server/routers/project-preference';
+import { projectPreferenceRouter } from 'source/feature/server/routers/project-preference/router';
 import { router } from 'source/feature/server/trpc';
 
 export const appRouter = router({
