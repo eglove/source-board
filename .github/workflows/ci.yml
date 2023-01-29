@@ -20,7 +20,8 @@ jobs:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-pnpm-store-
-      - run: pnpm install --force
+      - run: pnpm install
+      - run: npx prisma generate
       - name: Run EsLint
         run: npm run lint
       - name: Run Tests
