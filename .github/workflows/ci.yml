@@ -11,7 +11,9 @@ jobs:
           node-version: 18
       - uses: pnpm/action-setup@v2
         with:
-          run_install: true
+          run_install: |
+            - recursive: true
+              args: [--node-linker hoisted]
       - name: Run EsLint
         run: npm run lint
       - name: Run Tests
