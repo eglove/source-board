@@ -2,7 +2,6 @@ import { generateMock } from '@anatine/zod-mock';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
 import { projectPreferenceGetForUserReturnSchema } from 'source/feature/server/routers/project-preference';
 import { expectNoA11yViolations, mockTrpcError } from 'source/tests/util';
@@ -65,9 +64,7 @@ describe('ProjectPreferences', () => {
   });
 
   it('should be able to fill out form and submit', async () => {
-    const { getByRole } = render(<ProjectPreferencesView isLoading={false} />, {
-      wrapper: MemoryRouterProvider,
-    });
+    const { getByRole } = render(<ProjectPreferencesView isLoading={false} />);
 
     const inputElement = getByRole('textbox', {
       name: 'Add',

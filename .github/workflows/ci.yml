@@ -1,0 +1,53 @@
+name: CI
+on:
+  push:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - develop
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - develop
+jobs:
+  lintTest:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Run EsLint
+        run: npm run eslint
+      - name: Run Tests
+        run: npm run test
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'typescript' ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/autobuild@v2
+      - uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{matrix.language}}"
+  merge:
+    name: Merge
+    needs: [lintTest, codeql]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Develop
+          branch: master
