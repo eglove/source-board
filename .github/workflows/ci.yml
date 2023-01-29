@@ -17,7 +17,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
       - name: Run EsLint
-        run: npm run eslint
+        run: npm run lint
       - name: Run Tests
         run: npm run test
   codeql:
@@ -40,14 +40,3 @@ jobs:
       - uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
-  merge:
-    name: Merge
-    needs: [lintTest, codeql]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Create PR
-        uses: peter-evans/create-pull-request@v4
-        with:
-          commit-message: Develop
-          branch: master
