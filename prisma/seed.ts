@@ -1,9 +1,15 @@
+import * as process from 'node:process';
+
 import { faker } from '@faker-js/faker';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function seeder() {
+  if (process.env.NODE_ENV !== 'development') {
+    throw new Error('Only available in development mode.');
+  }
+
   await prisma.$transaction([
     prisma.user.deleteMany(),
     prisma.projectPreference.deleteMany(),

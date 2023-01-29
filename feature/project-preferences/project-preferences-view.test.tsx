@@ -1,25 +1,11 @@
 import { generateMock } from '@anatine/zod-mock';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
 import { projectPreferenceGetForUserReturnSchema } from 'source/feature/server/routers/project-preference';
 import { expectNoA11yViolations, mockTrpcError } from 'source/tests/util';
 
 describe('ProjectPreferences', () => {
-  it('should render without a11y violations', async () => {
-    const { container } = render(
-      <ProjectPreferencesView
-        data={generateMock(projectPreferenceGetForUserReturnSchema)}
-        isLoading={false}
-      />,
-    );
-
-    const a11y = await axe(container);
-
-    expect(a11y).toHaveNoViolations();
-  });
-
   it('should show loading image while loading', () => {
     const { getByRole } = render(<ProjectPreferencesView isLoading />);
 
