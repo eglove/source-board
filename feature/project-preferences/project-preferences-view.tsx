@@ -2,10 +2,8 @@ import * as Label from '@radix-ui/react-label';
 import { type TRPCClientErrorLike } from '@trpc/client';
 import ErrorLoading from 'source/feature/common/error-loading/error-loading';
 import styles from 'source/feature/project-preferences/project-preferences.module.css';
-import {
-  type ProjectPreferenceGetForUserReturn,
-  type projectPreferenceRouter,
-} from 'source/feature/server/routers/project-preference';
+import { type ProjectPreferenceGetForUserReturn } from 'source/feature/server/routers/project-preference/get-for-user';
+import { type projectPreferenceRouter } from 'source/feature/server/routers/project-preference/router';
 
 type ProjectPreferencesViewProperties = {
   isLoading: boolean;

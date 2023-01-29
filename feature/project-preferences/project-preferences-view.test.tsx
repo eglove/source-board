@@ -2,8 +2,9 @@ import { generateMock } from '@anatine/zod-mock';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
-import { projectPreferenceGetForUserReturnSchema } from 'source/feature/server/routers/project-preference';
 import { expectNoA11yViolations, mockTrpcError } from 'source/tests/util';
+
+import { projectPreferenceGetForUserReturnSchema } from '../server/routers/project-preference/get-for-user';
 
 describe('ProjectPreferences', () => {
   it('should show loading image while loading', () => {
