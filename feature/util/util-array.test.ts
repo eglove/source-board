@@ -1,7 +1,7 @@
 import { reorder } from 'source/feature/util/util-array';
 
 describe('UtilArray', () => {
-  it('reorder an array correctly', () => {
+  it('should reorder an array correctly', () => {
     const testArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     let reordered = reorder(testArray, 0, 7);
@@ -9,6 +9,16 @@ describe('UtilArray', () => {
 
     reordered = reorder(reordered, 8, 0);
     expect(reordered).toEqual([9, 2, 3, 4, 5, 6, 7, 8, 1, 10]);
+  });
+
+  it('should reorder a string array correctly', () => {
+    const testArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+
+    let reordered = reorder(testArray, 0, 5);
+    expect(reordered).toEqual(['b', 'c', 'd', 'e', 'f', 'a', 'g']);
+
+    reordered = reorder(reordered, 6, 0);
+    expect(reordered).toEqual(['g', 'b', 'c', 'd', 'e', 'f', 'a']);
   });
 
   it('should return the original array unchanged if the params are incorrect', () => {

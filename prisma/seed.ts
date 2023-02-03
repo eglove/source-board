@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function seeder() {
+async function seeder(): Promise<void> {
   if (process.env.NODE_ENV !== 'development') {
     throw new Error('Only available in development mode.');
   }

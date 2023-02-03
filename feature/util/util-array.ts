@@ -2,7 +2,7 @@ export function reorder<ArrayType extends unknown[]>(
   list: ArrayType,
   startIndex: number,
   endIndex: number,
-) {
+): ArrayType {
   if (
     startIndex < 0 ||
     startIndex >= list.length ||
@@ -16,5 +16,5 @@ export function reorder<ArrayType extends unknown[]>(
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
 
-  return result;
+  return result as ArrayType;
 }

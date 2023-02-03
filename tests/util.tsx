@@ -33,7 +33,9 @@ export const mockTrpcError = (
   };
 };
 
-export const expectNoA11yViolations = async (container: HTMLElement) => {
+export const expectNoA11yViolations = async (
+  container: HTMLElement,
+): Promise<void> => {
   const a11y = await axe(container);
   expect(a11y).toHaveNoViolations();
 };
