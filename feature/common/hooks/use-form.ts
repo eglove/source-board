@@ -19,14 +19,14 @@ type UseFormProperties = {
 type UseFormReturn<StateType extends Record<string, unknown>> = {
   clearFieldErrors: () => void;
   clearForm: () => void;
-  fieldErrors: Record<keyof StateType, string[] | undefined> | undefined;
+  fieldErrors: Record<keyof StateType, string[] | null> | undefined;
   formError: Error | null;
   formState: StateType;
   handleChange: (event: ChangeEvent) => void;
   handleSubmit: (event: FormEvent) => void;
   resetForm: () => void;
   setFieldErrors: Dispatch<
-    SetStateAction<Record<keyof StateType, string[] | undefined> | undefined>
+    SetStateAction<Record<keyof StateType, string[] | null> | undefined>
   >;
   setFormError: Dispatch<SetStateAction<Error | null>>;
   setFormState: Dispatch<SetStateAction<StateType>>;
@@ -39,17 +39,17 @@ export default function useForm<StateType extends Record<string, unknown>>(
   const [formState, setFormState] = useState(initialState);
   const [formError, setFormError] = useState<Error | null>(null);
   const [fieldErrors, setFieldErrors] =
-    useState<Record<keyof StateType, string[] | undefined>>();
+    useState<Record<keyof StateType, string[] | null>>();
 
   function clearFieldErrors(): void {
     if (fieldErrors !== undefined) {
-      const replaced = replaceAllValuesShallow(fieldErrors);
+      const replaced = replaceAllValuesShallow(fieldErrors, null);
       setFieldErrors(replaced);
     }
   }
 
   function clearForm(): void {
-    const replaced = replaceAllValuesShallow(formState);
+    const replaced = replaceAllValuesShallow(formState, '');
     setFormState(replaced);
   }
 
