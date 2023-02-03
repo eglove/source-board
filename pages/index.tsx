@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { PageLayoutMain } from 'source/feature/page-layout/page-layout-main';
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <>
       <Head>

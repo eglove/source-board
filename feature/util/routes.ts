@@ -12,7 +12,7 @@ export function getUrl(
   paths?: Paths[],
   parameters?: Array<{ name: string; value: string }>,
   base = baseUrl,
-) {
+): string {
   let url = new URL(base).toString();
 
   if (!url.endsWith('/')) {

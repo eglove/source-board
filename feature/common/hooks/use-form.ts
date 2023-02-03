@@ -1,4 +1,10 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react';
+import {
+  type ChangeEvent,
+  type Dispatch,
+  type FormEvent,
+  type SetStateAction,
+  useState,
+} from 'react';
 import { replaceAllValuesShallow } from 'source/feature/util/util-object';
 import { getZodFieldErrors } from 'source/feature/util/util-zod';
 import { type z } from 'zod';
@@ -10,10 +16,26 @@ type UseFormProperties = {
   zodValidator?: z.ZodTypeAny;
 };
 
+type UseFormReturn<StateType extends Record<string, unknown>> = {
+  clearFieldErrors: () => void;
+  clearForm: () => void;
+  fieldErrors: Record<keyof StateType, string[] | undefined> | undefined;
+  formError: Error | null;
+  formState: StateType;
+  handleChange: (event: ChangeEvent) => void;
+  handleSubmit: (event: FormEvent) => void;
+  resetForm: () => void;
+  setFieldErrors: Dispatch<
+    SetStateAction<Record<keyof StateType, string[] | undefined> | undefined>
+  >;
+  setFormError: Dispatch<SetStateAction<Error | null>>;
+  setFormState: Dispatch<SetStateAction<StateType>>;
+};
+
 export default function useForm<StateType extends Record<string, unknown>>(
   initialState: StateType,
   properties?: UseFormProperties,
-) {
+): UseFormReturn<StateType> {
   const [formState, setFormState] = useState(initialState);
   const [formError, setFormError] = useState<Error | null>(null);
   const [fieldErrors, setFieldErrors] =
@@ -26,12 +48,12 @@ export default function useForm<StateType extends Record<string, unknown>>(
     }
   }
 
-  function clearForm() {
+  function clearForm(): void {
     const replaced = replaceAllValuesShallow(formState);
     setFormState(replaced);
   }
 
-  function resetForm() {
+  function resetForm(): void {
     setFormState(initialState);
   }
 
