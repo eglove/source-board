@@ -25,7 +25,7 @@ describe('Navigation', () => {
       },
       {
         name: 'Project Preferences',
-        path: '/developer/project-preferences/',
+        path: '/developer/project-preferences',
       },
     ];
 

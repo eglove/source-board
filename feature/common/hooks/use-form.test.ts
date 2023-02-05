@@ -91,9 +91,9 @@ describe('useForm', () => {
   it('should clear field errors', () => {
     const fieldErrors = {
       id: ['Bad id'],
-      phone: undefined,
-      name: undefined,
-      address: undefined,
+      phone: null,
+      name: null,
+      address: null,
     };
 
     const { result } = renderHook(() => {
@@ -111,10 +111,10 @@ describe('useForm', () => {
     });
 
     expect(result.current.fieldErrors).toStrictEqual({
-      id: undefined,
-      phone: undefined,
-      name: undefined,
-      address: undefined,
+      id: null,
+      phone: null,
+      name: null,
+      address: null,
     });
   });
 
@@ -128,10 +128,10 @@ describe('useForm', () => {
     });
 
     expect(result.current.formState).toStrictEqual({
-      id: undefined,
-      name: undefined,
-      phone: undefined,
-      address: undefined,
+      id: '',
+      name: '',
+      phone: '',
+      address: '',
     });
   });
 

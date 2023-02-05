@@ -13,7 +13,7 @@ describe('Routes', () => {
     expect(() => {
       return new URL(url);
     }).not.toThrow();
-    expect(url).toBe(`${baseUrl}/one/two/?name=Ethan&is=cool`);
+    expect(url).toBe(`${baseUrl}/one/two?name=Ethan&is=cool`);
 
     url = getUrl(
       ['one', 'two'],
@@ -27,6 +27,6 @@ describe('Routes', () => {
     expect(() => {
       return new URL(url);
     }).not.toThrow();
-    expect(url).toBe('https://example.com/one/two/?name=Ethan&is=cool');
+    expect(url).toBe('https://example.com/one/two?name=Ethan&is=cool');
   });
 });

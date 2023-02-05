@@ -8,7 +8,13 @@ import { projectPreferenceGetForUserReturnSchema } from '../server/routers/proje
 
 describe('ProjectPreferences', () => {
   it('should show loading image while loading', () => {
-    const { getByRole } = render(<ProjectPreferencesView isLoading />);
+    const { getByRole } = render(
+      <ProjectPreferencesView
+        isLoading
+        create={jest.fn()}
+        refetch={jest.fn()}
+      />,
+    );
 
     const element = getByRole('img', {
       name: 'Loading',
@@ -19,7 +25,12 @@ describe('ProjectPreferences', () => {
 
   it('should show the correct error message when there is an error', () => {
     const { getByText } = render(
-      <ProjectPreferencesView error={mockTrpcError()} isLoading={false} />,
+      <ProjectPreferencesView
+        create={jest.fn()}
+        error={mockTrpcError()}
+        isLoading={false}
+        refetch={jest.fn()}
+      />,
     );
 
     const element = getByText('Error! Failed to get preferences!');
@@ -30,7 +41,12 @@ describe('ProjectPreferences', () => {
   it('should render the correct elements with data', async () => {
     const mockData = generateMock(projectPreferenceGetForUserReturnSchema);
     const { container, getByText, getAllByRole, getByRole } = render(
-      <ProjectPreferencesView data={mockData} isLoading={false} />,
+      <ProjectPreferencesView
+        create={jest.fn()}
+        data={mockData}
+        isLoading={false}
+        refetch={jest.fn()}
+      />,
     );
 
     await expectNoA11yViolations(container);
@@ -51,15 +67,34 @@ describe('ProjectPreferences', () => {
   });
 
   it('should be able to fill out form and submit', async () => {
-    const { getByRole } = render(<ProjectPreferencesView isLoading={false} />);
+    const create = jest.fn();
+    const refetch = jest.fn();
+
+    const { getByRole } = render(
+      <ProjectPreferencesView
+        create={create}
+        isLoading={false}
+        refetch={refetch}
+      />,
+    );
 
     const inputElement = getByRole('textbox', {
       name: 'Add',
     }) as HTMLInputElement;
+    const submitButton = getByRole('button', {
+      name: 'Add',
+    });
 
     expect(inputElement).toBeInTheDocument();
 
     await userEvent.type(inputElement, 'Text Input');
     expect(inputElement.value).toBe('Text Input');
+
+    await userEvent.click(submitButton);
+    expect(create).toHaveBeenCalledWith({
+      name: 'Text Input',
+      username: 'developer',
+    });
+    expect(refetch).toHaveBeenCalledTimes(1);
   });
 });
