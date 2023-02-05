@@ -14,6 +14,7 @@
     "lint": "next lint --fix",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll --coverage",
+    "db:generate": "prisma generate",
     "seed-db": "ts-node --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
     "prepare": "husky install"
   },
