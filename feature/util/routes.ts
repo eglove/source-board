@@ -20,8 +20,11 @@ export function getUrl(
   }
 
   if (paths !== undefined) {
-    for (const path of paths) {
-      url = new URL(`${url}${path}/`).toString();
+    for (const [index, path] of paths.entries()) {
+      url =
+        index === paths.length - 1
+          ? new URL(`${url}${path}`).toString()
+          : new URL(`${url}${path}/`).toString();
     }
   }
 
