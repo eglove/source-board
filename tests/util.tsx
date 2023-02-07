@@ -39,3 +39,20 @@ export const expectNoA11yViolations = async (
   const a11y = await axe(container);
   expect(a11y).toHaveNoViolations();
 };
+
+export const clearTestCookies = (): void => {
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: `username=;expires=${new Date(0).toISOString()}`,
+  });
+};
+
+export const getTestUserCookie = (): void => {
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+
+  Object.defineProperty(window.document, 'cookie', {
+    writable: true,
+    value: `username=developer;expires=${today.toISOString()}`,
+  });
+};

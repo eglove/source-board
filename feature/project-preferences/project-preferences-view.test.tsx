@@ -2,7 +2,11 @@ import { generateMock } from '@anatine/zod-mock';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
-import { expectNoA11yViolations, mockTrpcError } from 'source/tests/util';
+import {
+  expectNoA11yViolations,
+  getTestUserCookie,
+  mockTrpcError,
+} from 'source/tests/util';
 
 import { projectPreferenceGetForUserReturnSchema } from '../server/routers/project-preference/get-for-user';
 
@@ -69,6 +73,7 @@ describe('ProjectPreferences', () => {
   it('should be able to fill out form and submit', async () => {
     const create = jest.fn();
     const refetch = jest.fn();
+    getTestUserCookie();
 
     const { getByRole } = render(
       <ProjectPreferencesView
