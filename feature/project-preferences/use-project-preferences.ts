@@ -35,25 +35,20 @@ export const useProjectPreferences = ({
 
   const { handleChange, formState, handleSubmit, setFormError } = useForm<
     Pick<ProjectPreferenceCreateInput, 'name'>
-  >(
-    {
-      name: '',
-    },
-    {
-      async onSubmit() {
-        if (user?.username === undefined) {
-          setFormError(new Error('Username not found'));
-          return;
-        }
+  >(initialState, {
+    async onSubmit() {
+      if (user?.username === undefined || !user.isLoggedIn) {
+        setFormError(new Error('Username not found'));
+        return;
+      }
 
-        await create({
-          name: formState.name,
-          username: user.username,
-        });
-        await refetch();
-      },
+      await create({
+        name: formState.name,
+        username: user.username,
+      });
+      await refetch();
     },
-  );
+  });
 
   return {
     handleChange,

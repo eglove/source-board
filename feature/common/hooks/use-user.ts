@@ -1,19 +1,16 @@
-import useIsLoggedIn from 'source/feature/common/hooks/use-is-logged-in';
+import { parseCookies } from 'nookies';
 
-type UseUserReturn =
-  | {
-      isLoggedIn: boolean;
-      username: string;
-    }
-  | undefined;
+type UseUserReturn = {
+  isLoggedIn: boolean;
+  username: string | undefined;
+};
 
 export default function useUser(): UseUserReturn {
-  const isLoggedIn = useIsLoggedIn();
+  const { username, expires } = parseCookies();
 
-  if (isLoggedIn) {
-    return {
-      isLoggedIn,
-      username: 'developer',
-    };
-  }
+  return {
+    isLoggedIn:
+      username !== undefined && new Date(expires).getTime() > Date.now(),
+    username,
+  };
 }

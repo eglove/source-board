@@ -1,6 +1,7 @@
 import { act, render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import Navigation from 'source/feature/navigation/navigation';
+import { getTestUserCookie } from 'source/tests/util';
 
 describe('Navigation', () => {
   it('should have no a11y violations', async () => {
@@ -16,6 +17,8 @@ describe('Navigation', () => {
   });
 
   it('should render navigation', () => {
+    getTestUserCookie();
+
     const { getByRole } = render(<Navigation />);
 
     const links = [
