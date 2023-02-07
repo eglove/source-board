@@ -1,13 +1,13 @@
 import { act, renderHook } from '@testing-library/react';
 import { type FormEvent } from 'react';
 import { useProjectPreferences } from 'source/feature/project-preferences/use-project-preferences';
-import { clearTestCookies, getTestUserCookie } from 'source/tests/util';
+import { setTestUserCookie } from 'source/tests/util';
 
 describe('useProjectPreferences', () => {
   it('should run create on submit', () => {
     const create = jest.fn();
     const refetch = jest.fn();
-    getTestUserCookie();
+    setTestUserCookie();
 
     const { result } = renderHook(() => {
       return useProjectPreferences({
@@ -35,7 +35,6 @@ describe('useProjectPreferences', () => {
   it('should not call create if user is undefined', () => {
     const create = jest.fn();
     const refetch = jest.fn();
-    clearTestCookies();
 
     const { result } = renderHook(() => {
       return useProjectPreferences({

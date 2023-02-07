@@ -4,14 +4,14 @@ import userEvent from '@testing-library/user-event';
 import ProjectPreferencesView from 'source/feature/project-preferences/project-preferences-view';
 import {
   expectNoA11yViolations,
-  getTestUserCookie,
   mockTrpcError,
+  setTestUserCookie,
 } from 'source/tests/util';
 
 import { projectPreferenceGetForUserReturnSchema } from '../server/routers/project-preference/get-for-user';
 
 describe('ProjectPreferences', () => {
-  it('should show loading image while loading', () => {
+  it('should show loading image while loading', async () => {
     const { getByRole } = render(
       <ProjectPreferencesView
         isLoading
@@ -73,7 +73,7 @@ describe('ProjectPreferences', () => {
   it('should be able to fill out form and submit', async () => {
     const create = jest.fn();
     const refetch = jest.fn();
-    getTestUserCookie();
+    setTestUserCookie();
 
     const { getByRole } = render(
       <ProjectPreferencesView
