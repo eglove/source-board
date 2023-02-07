@@ -15,6 +15,7 @@ export type ProjectPreferenceGetForUserReturn = z.infer<
 
 export const getForUser = procedure
   .input(z.object({ username: z.string() }))
+  .output(projectPreferenceGetForUserReturnSchema)
   .query(async ({ input }): Promise<ProjectPreferenceGetForUserReturn> => {
     return prisma.projectPreference.findMany({
       select: {

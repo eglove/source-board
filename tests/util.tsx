@@ -40,14 +40,14 @@ export const expectNoA11yViolations = async (
   expect(a11y).toHaveNoViolations();
 };
 
-export const clearTestCookies = (): void => {
+export const clearTestUserCookie = (): void => {
   Object.defineProperty(window.document, 'cookie', {
     writable: true,
     value: `username=;expires=${new Date(0).toISOString()}`,
   });
 };
 
-export const getTestUserCookie = (): void => {
+export const setTestUserCookie = (): void => {
   const today = new Date();
   today.setDate(today.getDate() + 1);
 

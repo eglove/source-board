@@ -22,6 +22,7 @@ export type ProjectPreferenceCreateReturn = z.infer<
 
 export const create = procedure
   .input(projectPreferenceCreateInputSchema)
+  .output(projectPreferenceCreateReturnSchema)
   .mutation(async ({ input }): Promise<ProjectPreferenceCreateReturn> => {
     return prisma.projectPreference.create({
       select: {
